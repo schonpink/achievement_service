@@ -1,0 +1,64 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: user
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  data:
+    redis:
+      port: 6379
+      host: localhost
+      channels:
+        achievement: achievement-channel
+        skill: skill-acquired-channel
+        post: post-channel
+        mentorship_channel: mentorship-accepted-channel
+
+  async:
+    corePoolSize: 8
+    maxPoolSize: 10
+    queueCapacity: 1000
+    threadNamePrefix: "task-executor-thread-"
+
+  achievements:
+    skill:
+      master:
+        title: Skill-Master
+
+    post:
+      writer:
+        title: Writer
+      leader:
+        title: Opinion-Leader
+
+    achievement:
+      recursion:
+        title: Recursion
+
+    comment:
+      expert:
+        title: Expert
+
+server:
+  port: 8085
+
+logging:
+  level:
+    root: info
+
+project-service:
+  host: localhost
+  port: 8082
